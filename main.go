@@ -27,12 +27,15 @@ type player struct {
 func (p *player) update() {
 	if flag == true {
 		p.pos.x += 1
-		flag = false
+		if p.pos.x == p.level.width-2 {
+			flag = false
+		}
 	} else {
 		p.pos.x -= 1
-		flag = true
+		if p.pos.x == 1 {
+			flag = true
+		}
 	}
-
 }
 
 type stats struct {
@@ -126,7 +129,7 @@ func (g *game) loop() {
 		g.render()
 		g.stats.update()
 
-		time.Sleep(time.Second * 1)
+		time.Sleep(time.Millisecond * 100)
 	}
 }
 func (g *game) update() {
